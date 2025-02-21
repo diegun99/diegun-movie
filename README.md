@@ -80,3 +80,34 @@ And join the Nx community:
 - [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)
 - [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- 
+
+
+crear un proyecto con npx  , un espacio nx
+lo ideal es crear un monorepository para tener varias aplicaciones
+--seria algo asi como microservicios?? :O
+(leer la documentacion de nx)
+esto nos permite usar cualquier gestor de paquetes, no solo npm
+
+npx create-nx-workspace diegun-movie --preset=angular
+
+integrated mono repository
+esbuild
+scss
+server side rendering no
+
+ingresar a la carpeta
+
+cd diegun-movie
+
+instalar tailwind
+npx nx generate @nx/angular:setup-tailwind
+
+---abrir con vs studio code
+code .
+
+-------
+
+configurar tailwind en el fichero respectivo
+tailwind.config.js
+
