@@ -1,9 +1,11 @@
 import { Component, computed, effect, HostListener, inject } from '@angular/core';
 import { MoviesService } from './movies.service';
+import { RouterLink } from '@angular/router';
+import { MovieCardComponent } from './movie-card/movie-card/movie-card.component';
 
 @Component({
   selector: 'app-movies',
-  imports: [],
+  imports: [RouterLink,MovieCardComponent],
   templateUrl: './movies.component.html'
 })
 export class MoviesComponent {
@@ -25,7 +27,7 @@ const scrollthreshold = document.documentElement.scrollHeight;
 if(scrollPosition >= scrollthreshold){///  el usuario hay llegado al final de la pagina
   effect(
     ()=>{
-      this.movies()
+      this._movieService.getMovies();
     }
   )
 }

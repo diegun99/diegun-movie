@@ -26,7 +26,7 @@ private readonly apiUrl = 'https://api.themoviedb.org/3'
 private readonly _http = inject(HttpClient)
 
 constructor(){
-    this._getMovies()/// cada vez que el servicio inicie su ejecucion
+    this.getMovies()/// cada vez que el servicio inicie su ejecucion
     //se ejecuta el constructor y llama el método que setea el signa
     // y cuando el signal cambia, afectara a todos sus dependientes
 }
@@ -38,7 +38,7 @@ getMovieById(id: number) : Observable<MovieResponse> {
 
 
 // privado por ahora para probar, pero puede que toque hacerlo publico segun sea el caso
-private _getMovies() :void{//  aqui obtiene las peliculas y se las asigna a la variable signal movies, para sea usado en cualquier parte
+getMovies() :void{//  aqui obtiene las peliculas y se las asigna a la variable signal movies, para sea usado en cualquier parte
     this._http.get<MovieResponse>(
         `${this.apiUrl}/movie/popular?api_key=${this.apiKey}`
     ).pipe(
