@@ -15,7 +15,7 @@ selectedMovie = signal<Movie | null>(null)
 //propiedades para las paginas
 currentPage = signal<number>(1);
 hasMorepages = signal<boolean>(true);
-isLoading = signal<boolean>(false);
+isLoading = signal<boolean>(true);
 
 
 // crear propiedades privadas para el contexto de este fichero
@@ -43,6 +43,8 @@ getMovies() :void{//  aqui obtiene las peliculas y se las asigna a la variable s
         `${this.apiUrl}/movie/popular?api_key=${this.apiKey}`
     ).pipe(
         tap(response =>{
+            // eslint-disable-next-line no-debugger
+debugger
             const currentMovies = this.movies();
             this.movies.set([...currentMovies,...response.results])/// se concatena las pelis actuales, mas el resultado
             this.hasMorepages.set(response.page < response.total_pages)
