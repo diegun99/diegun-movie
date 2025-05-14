@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Movie } from '../../models/movie.interface';
-import { JsonPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-movie-card',
