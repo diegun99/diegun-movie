@@ -3,6 +3,7 @@ import { Movie, MovieResponse } from './models/movie.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
+
 @Injectable({providedIn: 'root'})
 export class MoviesService {
 
@@ -29,6 +30,7 @@ constructor(){
     this.getMovies()/// cada vez que el servicio inicie su ejecucion
     //se ejecuta el constructor y llama el método que setea el signa
     // y cuando el signal cambia, afectara a todos sus dependientes
+    this.getTrending()
 }
 
 
@@ -55,6 +57,36 @@ debugger
     )
     .subscribe()
 
+}
+
+getTrending() :void{//  aqui obtiene las peliculas y se las asigna a la variable signal movies, para sea usado en cualquier parte
+    this._http.get<MovieResponse>(
+        `${this.apiUrl}/trending/movie/day?api_key=${this.apiKey}`
+    ).pipe(
+        tap((movies: MovieResponse) =>{
+            /// eslint-disable-next-line no-debugger
+            this.trendingMovies.set(movies.results)
+
+        },
+        tap(
+            ()=> this.setRandomMovie()
+        )
+        )/// en la signal de movies se setea el results
+    )
+    .subscribe()
+
+}
+
+
+setRandomMovie(){
+    const trendingLength = this.trendingMovies().length;
+    const randomIndex = this._getRandomInt(0,trendingLength);
+   const randomMovie = this.trendingMovies()[randomIndex];
+   this.selectedMovie.set(randomMovie);
+}
+///generar numero aleatorio para que escoja una de las pelis al azar
+private _getRandomInt(min=0, max=50): number {
+    return Math.floor(Math.random() * (max-min)) + min;
 }
     
 

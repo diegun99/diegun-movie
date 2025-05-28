@@ -1,15 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeroComponent } from './layout/hero/hero.component';
+import { MoviesService } from './features/movies/movies.service';
 
 
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,HeroComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
+  private readonly _movieService = inject(MoviesService) /// inyectar read only los servicios y privados
+  // readonly movieSelected = this._movieService.selectedMovie;
+  heroMovie = computed(()=> this._movieService.selectedMovie())
 
   showButton = false;
 

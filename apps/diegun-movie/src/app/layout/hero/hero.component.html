@@ -3,7 +3,8 @@
 
     <div class="relative h-[80vh] w-full">
         <div class="absolute inset-0">
-            <img [src]="https://image.tmdb.org/t/p/w500{{movieData.backdrop_path}}" [alt]="{{movieData.title}}" 
+            <img [src]="'https://image.tmdb.org/t/p/w500'+movieData.backdrop_path"
+             [alt]="movie().title"
             class="w-full h-full object-cover">
             <div class ="aboslute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent"></div>
         </div>
