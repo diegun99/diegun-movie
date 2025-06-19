@@ -27,10 +27,10 @@ private readonly apiUrl = 'https://api.themoviedb.org/3'
 private readonly _http = inject(HttpClient)
 
 constructor(){
+    this.getTrending()
     this.getMovies()/// cada vez que el servicio inicie su ejecucion
     //se ejecuta el constructor y llama el método que setea el signa
     // y cuando el signal cambia, afectara a todos sus dependientes
-    this.getTrending()
 }
 
 
@@ -65,6 +65,9 @@ getTrending() :void{//  aqui obtiene las peliculas y se las asigna a la variable
         `${this.apiUrl}/trending/movie/day?api_key=${this.apiKey}`
     ).pipe(
         tap((movies: MovieResponse) =>{
+            // eslint-disable-next-line no-debugger
+            debugger
+            
             /// eslint-disable-next-line no-debugger
             this.trendingMovies.set(movies.results)
 this.setRandomMovie()

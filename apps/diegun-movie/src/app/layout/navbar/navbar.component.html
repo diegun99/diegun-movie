@@ -1,0 +1,16 @@
+<nav class="fixed top-0 z-50 w-full bg-gradient-to-b from-black to-transparent">
+    <div class="px-4 py-4 md:px-10">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="/apps/diegun-movie/src/assets/20231111_214434.jpg" alt="Movie" class="h-8">
+                <div class="hidden ml-8 space-x-4 md flex">
+                    <a [routerLink]="['/']" routerLinkActive="!text-netflix-red" class="text-white transition-colors hover:text-netflix-gray">Home</a>
+                    <a [routerLink]="['/movies']" routerLinkActive="!text-netflix-red" class="text-white transition-colors hover:text-netflix-gray">Movies</a>
+                    <a [routerLink]="['/my-list']" routerLinkActive="!text-netflix-red" class="text-white transition-colors hover:text-netflix-gray">My List</a>
+                </div>
+            </div>
+            <!--TODO: Add search bar-->
+
+        </div>
+    </div>
+</nav>
