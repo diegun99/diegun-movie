@@ -19,7 +19,7 @@ export class AppComponent {
 
   showButton = false;
 
-  constructo(){
+  constructor(){
     window.addEventListener('scroll',// escucha el scroll, y si es mayor a cien 
       ()=>{
         this.showButton = window.scrollY > 100;// si es mayor a cien, devolvera true , si no, devolvera false

@@ -42,7 +42,7 @@ getMovieById(id: number) : Observable<MovieResponse> {
 // privado por ahora para probar, pero puede que toque hacerlo publico segun sea el caso
 getMovies() :void{//  aqui obtiene las peliculas y se las asigna a la variable signal movies, para sea usado en cualquier parte
     this._http.get<MovieResponse>(
-        `${this.apiUrl}/movie/popular?api_key=${this.apiKey}`
+        `${this.apiUrl}/movie/popular?api_key=${this.apiKey}&page=${this.currentPage()}`
     ).pipe(
         tap(response =>{
             // eslint-disable-next-line no-debugger
@@ -51,6 +51,7 @@ debugger
             this.movies.set([...currentMovies,...response.results])/// se concatena las pelis actuales, mas el resultado
             this.hasMorepages.set(response.page < response.total_pages)
             this.currentPage.update((currentPage)=>currentPage +1);
+            
             this.isLoading.set(false)
         }
         )/// en la signal de movies se setea el results
@@ -66,11 +67,8 @@ getTrending() :void{//  aqui obtiene las peliculas y se las asigna a la variable
         tap((movies: MovieResponse) =>{
             /// eslint-disable-next-line no-debugger
             this.trendingMovies.set(movies.results)
-
-        },
-        tap(
-            ()=> this.setRandomMovie()
-        )
+this.setRandomMovie()
+        }
         )/// en la signal de movies se setea el results
     )
     .subscribe()
