@@ -2,14 +2,20 @@
     <div class="px-4 py-4 md:px-10">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-                <img src="/apps/diegun-movie/src/assets/20231111_214434.jpg" alt="Movie" class="h-8">
-                <div class="hidden ml-8 space-x-4 md flex">
-                    <a [routerLink]="['/']" routerLinkActive="!text-netflix-red" class="text-white transition-colors hover:text-netflix-gray">Home</a>
+                <img src="apps/diegun-movie/src/assets/20231111_214434.jpg" alt="Movie" class="h-8">
+                <div class="ml-8 space-x-4 md flex">
+                    <a [routerLink]="['/']" [routerLinkActiveOptions]='{exact : true}'  routerLinkActive="!text-netflix-red" class="text-white transition-colors hover:text-netflix-gray">Home</a>
                     <a [routerLink]="['/movies']" routerLinkActive="!text-netflix-red" class="text-white transition-colors hover:text-netflix-gray">Movies</a>
                     <a [routerLink]="['/my-list']" routerLinkActive="!text-netflix-red" class="text-white transition-colors hover:text-netflix-gray">My List</a>
                 </div>
             </div>
             <!--TODO: Add search bar-->
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <app-search></app-search>
+                </div>
+
+            </div>
 
         </div>
     </div>

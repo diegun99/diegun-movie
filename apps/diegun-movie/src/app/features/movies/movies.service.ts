@@ -85,6 +85,15 @@ setRandomMovie(){
    const randomMovie = this.trendingMovies()[randomIndex];
    this.selectedMovie.set(randomMovie);
 }
+
+
+searchMovie(query: string) : Observable<MovieResponse>{// metodo por completar
+ return this._http.get<MovieResponse>(`${this.apiUrl}/search/movie?api_key=${this.apiKey}&query=${query}`)
+}
+
+
+
+
 ///generar numero aleatorio para que escoja una de las pelis al azar
 private _getRandomInt(min=0, max=50): number {
     return Math.floor(Math.random() * (max-min)) + min;
