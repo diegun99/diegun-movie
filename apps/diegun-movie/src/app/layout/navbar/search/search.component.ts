@@ -41,4 +41,9 @@ export class SearchComponent {
     this.searchQuery.set('')
   }
 
+  getImage(movie : string)  : string{
+    return movie ? 'https://image.tmdb.org/t/p/w500' 
+    + movie : ''
+  }
+
 }
