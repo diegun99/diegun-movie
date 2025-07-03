@@ -18,13 +18,13 @@ export class MovieDetailsComponent {
   private readonly _router = inject(Router)
   private readonly _moviesService = inject(MoviesService)
   
-  // movie = rxResource(
-  //   {
-  //     request : this.movieId,
-  //     loader :()=> this._moviesService.getMovieById(this.movieId)
+  movie = rxResource(
+    {
+      request : this.movieId,
+      loader :()=> this._moviesService.getMovieById(this.movieId())
 
-  //   }
-  // );
+    }
+  );
   goBack() : void{
     this._router.navigate(['..'])/// los dos puntos sirve de manera abreviada para ir a la ruta anterior
   }

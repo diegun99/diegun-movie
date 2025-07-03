@@ -34,8 +34,8 @@ constructor(){
 }
 
 
-getMovieById(id: number) : Observable<MovieResponse> {
-    return this._http.get<MovieResponse>(`${this.apiUrl}/movie/${id}?api_key=${this.apiKey}`)
+getMovieById(id: string) : Observable<Movie> {
+    return this._http.get<Movie>(`${this.apiUrl}/movie/${id}?api_key=${this.apiKey}`)
 }
 
 
