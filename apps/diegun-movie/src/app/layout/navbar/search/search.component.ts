@@ -1,22 +1,25 @@
-import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
+import { Component, computed, inject, linkedSignal, model, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
 import { MoviesService } from '../../../features/movies/movies.service';
 import { Movie } from '../../../features/movies/models/movie.interface';
 import { DatePipe } from '@angular/common';
+import { ImageService } from '../../../shared/image.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
   standalone : true,
-  imports: [DatePipe],
+  imports: [DatePipe,FormsModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
 
-  searchQuery = signal<string>('');
+  searchQuery =  model<string>('')     /// usamos model
   private readonly _router = inject(Router)
   private readonly _moviesService = inject(MoviesService)
+  private readonly _imageService = inject(ImageService)
 
   filteredMovies = rxResource({
     // request : ()=> this.searchQuery(),// otra manera de hacer lo mismo 
@@ -27,10 +30,10 @@ export class SearchComponent {
   movies = linkedSignal(()=>this.filteredMovies.value()?.results ?? ([] as Movie[] ))
   // movies = computed(()=>this.filteredMovies.value()?.results ?? ([] as Movie[] )) // cada vez que las peliculas filtradas cambien, asigne el valor, el as sirver para castear
 
-  onSearchInput(event : Event){//// el valor del input se puede obtener usando los metodos nativos mediados mediante angular
-    const input = event.target as HTMLInputElement
-    this.searchQuery.set(input.value)
-  }
+  // onSearchInput(event : Event){//// el valor del input se puede obtener usando los metodos nativos mediados mediante angular
+  //   const input = event.target as HTMLInputElement
+  //   this.searchQuery.set(input.value)
+  // }
 
   goToDetails(movieId : string): void{
     this._router.navigate(['/movies',movieId])
@@ -42,8 +45,7 @@ export class SearchComponent {
   }
 
   getImage(movie : string)  : string{
-    return movie ? 'https://image.tmdb.org/t/p/w500' 
-    + movie : ''
+    return this._imageService.getImageUrl(movie)
   }
 
 }

@@ -1,10 +1,24 @@
-<div class="grid grid-col-2 gap-4 px-4 mx-auto mt-6 max-w-7xl md:grid-cols-4 lg:grid-cols-6">
+//todo add deferred loading ,lo que esta dentro del for , solo se va a renderizar cuando lleguemos a esa parte del viewport
 
-    @for(movie of movies(); track $index){
+<app-movie-row [title]="'Popular Movies'" [movies]="trendingMovies()"></app-movie-row>
+/// se usan algunos triggers en los parametros  ,, cuano este en el viewport, ocurrira todo lo que este adentro
+@defer (on viewport){
 
-        <a [routerLink]="['/movies',movie.id]">
-            <app-movie-card [movie]="movie"   class="w-full"  />
-        </a>
+    <div class="grid gap-4 px-4 mx-auto mt-5 max-w-7xl md:grid-cols-4 lg:grid-cols-4">
+        @for(movie of movies(); track $index){
+            <a [routerLink]="['/movies',movie.id]">
+                <app-movie-card [movie]="movie"   class="w-full"  />
+            </a>
+        }
+    </div>
+}
+@placeholder { 
+    <div class="flex justify-center p-4">
+        <div class="w-8 h-8 border-b-2 border-white rounded-full animate-spin">
 
-    }
-</div>
+        </div>
+    </div>
+
+}
+//// mientras se va renderizando lo del defer, lo de placeholder se mostrará
+///existen diferentes bloques, esta el placeholder, el loading, y error

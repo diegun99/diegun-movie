@@ -1,11 +1,12 @@
-import { Component, computed, effect, HostListener, inject } from '@angular/core';
+import { Component, computed, HostListener, inject } from '@angular/core';
 import { MoviesService } from './movies.service';
 import { RouterLink } from '@angular/router';
-import { MovieCardComponent } from './movie-card/movie-card/movie-card.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { MovieRowComponent } from "./movie-row/movie-row.component";
 
 @Component({
   selector: 'app-movies',
-  imports: [RouterLink,MovieCardComponent],
+  imports: [RouterLink, MovieCardComponent, MovieRowComponent],
   templateUrl: './movies.component.html'
 })
 export class MoviesComponent {
@@ -14,6 +15,7 @@ export class MoviesComponent {
 private readonly _movieService = inject(MoviesService) /// inyectar read only los servicios y privados
 readonly movies = this._movieService.movies;// se crea una propiedad writeblesignal
 // para el buscador se usará rxresource que es una nueva api experimental de angular 19
+trendingMovies = computed(()=>this._movieService.trendingMovies())
 // paginacion infinita
 // este decorador va a decorarrr un metodo
 @HostListener('window:scroll')  // con este decorador se controla la paginacion y le pasamos el evento que queremos escuchar

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Movie } from '../../models/movie.interface';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { Movie } from '../models/movie.interface';
+import { ImageService } from '../../../shared/image.service';
 
 
 @Component({
@@ -15,11 +16,12 @@ export class MovieCardComponent {
   // aqui se aplican las input signal , mas eficientes al parecer
   movie = input.required<Movie>();
   imageError = false;
+  private readonly _imageService = inject(ImageService)
 
 
   getImageUrl() :string{
-    const baseUrl = 'https://image.tmdb.org/t/p/w500';
-    return this.imageError ? 'placeholder.svg' : `${baseUrl}/${this.movie().poster_path}`
+    const posterPath = this.movie().poster_path;
+    return this._imageService.getImageUrl(posterPath);
   }
   setImageError(value: boolean) : void{
     this.imageError = value
